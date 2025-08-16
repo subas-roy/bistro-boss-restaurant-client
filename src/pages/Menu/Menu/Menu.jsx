@@ -7,13 +7,6 @@ const Menu = () => {
     <div className="max-w-screen-xl mx-auto">
       <title>Bistro Boss | Menu</title>
       <Cover img={menuImg} title={"Our Menu"}/>
-      <PopularMenu></PopularMenu>
-
-      <Cover img={menuImg} title={"Our Menu"}/>
-      <PopularMenu></PopularMenu>
-
-      <Cover img={menuImg} title={"Our Menu"}/>
-      <PopularMenu></PopularMenu>
     </div>
   );
 };
