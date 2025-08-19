@@ -13,7 +13,7 @@ const MenuCategory = ({ items, title, coverImg }) => {
       </div>
       <div className="flex flex-col justify-between items-center">
         <Link to={`/order/${title}`}>
-          <button className="btn btn-outline border-0 border-b-4 mt-2">Order Now</button>
+          <button className="btn btn-outline border-orange-400 border-0 border-b-4 hover:bg-black hover:text-white hover:border-black mt-2">Order Now</button>
         </Link>
       </div>
     </div>

@@ -14,7 +14,7 @@ const Featured = () => {
           <p className="text-2xl">March 20, 2023</p>
           <p className="text-2xl">WHERE CAN I GET SOME?</p>
           <p className="text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error voluptate facere, deserunt dolores maiores quod nobis quas quasi. Eaque repellat recusandae ad laudantium tempore consequatur consequuntur omnis ullam maxime tenetur.</p>
-          <button className="btn btn-outline border-0 border-b-4 mt-2">Read More</button>
+          <button className="btn btn-outline border-orange-400 border-0 border-b-4 hover:bg-black hover:text-white hover:border-black mt-2">Read More</button>
         </div>
       </div>
     </section>

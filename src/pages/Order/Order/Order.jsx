@@ -26,7 +26,7 @@ const Order = () => {
         <Cover title={"Order Food"} img={orderCoverImg} />
         <Tabs defaultIndex={tabIndex}>
           <TabList>
-            <Tab>offered</Tab>
+            <Tab>Offered</Tab>
             <Tab>Pizza</Tab>
             <Tab>Soup</Tab>
             <Tab>Dessert</Tab>
