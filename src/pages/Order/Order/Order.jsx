@@ -5,10 +5,14 @@ import 'react-tabs/style/react-tabs.css';
 import useMenu from "../../../hooks/useMenu";
 import OrderTab from "./OrderTab/OrderTab";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 const Order = () => {
+  const categories = ['offered', 'pizza', 'soup', 'dessert', 'salad'];
+  const { category } = useParams();
+  const initialIndex = categories.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
   const [menu] = useMenu();
-  const {category} = useParams();
   console.log(category);
   const desserts = menu.filter(item => item.category === "dessert");
   const soup = menu.filter(item => item.category === "soup");
@@ -20,7 +24,7 @@ const Order = () => {
       <title>Bistro Boss | Order Food</title>
       <div className="max-w-screen-xl mx-auto">
         <Cover title={"Order Food"} img={orderCoverImg} />
-        <Tabs>
+        <Tabs defaultIndex={tabIndex}>
           <TabList>
             <Tab>offered</Tab>
             <Tab>Pizza</Tab>
