@@ -51,7 +51,6 @@ const Login = () => {
               <input type="text" ref={captchaRef} name="captcha" className="input" placeholder="type the captcha above" />
               <button onClick={handleValidateCaptcha} className="btn btn-neutral btn-xs btn-outline">Validate</button>
               <button disabled={disabled} className="btn btn-neutral mt-4">Login</button>
-              <input type="submit" value="Login" />
             </fieldset>
           </form>
         </div>
