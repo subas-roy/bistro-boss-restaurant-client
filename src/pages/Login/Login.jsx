@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
+import { Link } from 'react-router-dom';
 const Login = () => {
   // State to control whether the Login button is disabled
   const [disabled, setDisabled] = useState(true);
@@ -25,8 +26,8 @@ const Login = () => {
     // Call the signIn function with email and password
     signIn(email, password)
       .then(result => {
-      const user = result.user;
-      console.log(user)
+        const user = result.user;
+        console.log(user)
       })
   }
 
@@ -65,6 +66,7 @@ const Login = () => {
               <button onClick={handleValidateCaptcha} className="btn btn-neutral btn-xs btn-outline">Validate</button>
               <button disabled={disabled} className="btn btn-neutral mt-4">Login</button>
             </fieldset>
+            <p className='text-center'><small>New Here? <Link to={"/signup"}>Create an account</Link></small></p>
           </form>
         </div>
       </div>
