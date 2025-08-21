@@ -1,31 +1,44 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-
+import { AuthContext } from '../../providers/AuthProvider';
 const Login = () => {
+  // State to control whether the Login button is disabled
   const [disabled, setDisabled] = useState(true);
 
+  // Get the signIn function from AuthContext
+  const { signIn } = useContext(AuthContext);
+
+  // Ref to access the captcha input field
   const captchaRef = useRef(null);
 
+  // Load the captcha engine when the component mounts
   useEffect(() => {
     loadCaptchaEnginge(6)
-  })
+  }, []) // Only run once on mount
 
+  // Handle form submission for login
   const handleLogin = event => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log({ email, password })
+    // Call the signIn function with email and password
+    signIn(email, password)
+      .then(result => {
+      const user = result.user;
+      console.log(user)
+      })
   }
 
+  // Validate the captcha input
   const handleValidateCaptcha = (e) => {
     e.preventDefault();
     const user_captcha_value = captchaRef.current.value;
     if (validateCaptcha(user_captcha_value)) {
-      setDisabled(false)
+      setDisabled(false) // Enable Login button if captcha is correct
     }
     else {
-      setDisabled(true)
+      setDisabled(true) // Keep Login button disabled if captcha is incorrect
     }
   }
 
