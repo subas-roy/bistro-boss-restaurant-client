@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
 // Create a context for authentication
@@ -17,12 +17,20 @@ const AuthProvider = ({ children }) => {
   // State to indicate loading status
   const [loading, setLoading] = useState(true);
 
+  // Function to create a new user with email and password
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  }
+
+  // Listen for authentication state changes and update user state accordingly
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser);
       console.log('current user', currentUser);
       setLoading(false);
     });
+    // Cleanup subscription on unmount
     return () => {
       unsubscribe();
     }
@@ -32,6 +40,7 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     loading,
+    createUser
   }
 
   // Provide authentication context to child components
