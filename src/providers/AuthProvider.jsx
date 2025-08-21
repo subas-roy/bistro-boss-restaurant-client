@@ -1,5 +1,5 @@
-import { createContext, useState } from "react";
-import { getAuth } from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
 // Create a context for authentication
@@ -16,6 +16,17 @@ const AuthProvider = ({ children }) => {
 
   // State to indicate loading status
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+      setUser(currentUser);
+      console.log('current user', currentUser);
+      setLoading(false);
+    });
+    return () => {
+      unsubscribe();
+    }
+  }, [])
 
   // Object containing authentication info to provide via context
   const authInfo = {
