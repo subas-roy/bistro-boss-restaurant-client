@@ -38,10 +38,18 @@ const SignUp = () => {
                   value: 6,
                   message: "Password must be at least 6 characters long.",
                 },
+                maxLength: {
+                  value: 20,
+                  message: "Password cannot exceed 20 characters.",
+                },
+                pattern: {
+                  value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
+                  message: "Password must include at least one uppercase letter, one number, and one special character.",
+                },
               })} name="password" className="input" placeholder="Password" />
               {errors.password && <p className="text-red-600">{errors.password.message}</p>}
 
-              <button className="btn btn-neutral mt-4">Sign up</button>
+              <input className="btn btn-neutral mt-4" type="submit" value="Sign In" />
             </fieldset>
           </form>
         </div>
