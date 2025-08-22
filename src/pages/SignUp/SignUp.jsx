@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../providers/AuthProvider";
+import { useContext } from "react";
 
 const SignUp = () => {
   const {
@@ -7,7 +9,15 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data)
+  const { createUser } = useContext(AuthContext);
+
+  const onSubmit = (data) => {
+    createUser(data.email, data.password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+  }
 
   return (
     <div className="max-w-screen-xl mx-auto hero min-h-screen">
