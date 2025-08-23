@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 const Login = () => {
   // State to control whether the Login button is disabled
@@ -9,6 +9,11 @@ const Login = () => {
 
   // Get the signIn function from AuthContext
   const { signIn } = useContext(AuthContext);
+
+  // Hooks for navigation and getting the previous location
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   // Load the captcha engine when the component mounts
   useEffect(() => {
@@ -43,6 +48,7 @@ const Login = () => {
             `
           }
         });
+        navigate(from, { replace: true }); // Redirect to the original page or home
       })
   }
 
