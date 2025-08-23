@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link } from 'react-router-dom';
@@ -9,9 +9,6 @@ const Login = () => {
 
   // Get the signIn function from AuthContext
   const { signIn } = useContext(AuthContext);
-
-  // Ref to access the captcha input field
-  const captchaRef = useRef(null);
 
   // Load the captcha engine when the component mounts
   useEffect(() => {
@@ -52,7 +49,7 @@ const Login = () => {
   // Validate the captcha input
   const handleValidateCaptcha = (e) => {
     e.preventDefault();
-    const user_captcha_value = captchaRef.current.value;
+    const user_captcha_value = e.target.value;
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false) // Enable Login button if captcha is correct
     }
@@ -82,8 +79,7 @@ const Login = () => {
                 <input type="password" name="password" className="input" placeholder="Password" />
                 <div><a className="link link-hover">Forgot password?</a></div>
                 < LoadCanvasTemplate />
-                <input type="text" ref={captchaRef} name="captcha" className="input" placeholder="type the captcha above" />
-                <button onClick={handleValidateCaptcha} className="btn btn-neutral btn-xs btn-outline">Validate</button>
+                <input type="text" onBlur={handleValidateCaptcha} className="input" placeholder="type the captcha above" />
                 <button disabled={disabled} className="btn btn-neutral mt-4">Login</button>
               </fieldset>
               <p className='text-center'><small>New Here? <Link to={"/signup"}>Create an account</Link></small></p>
