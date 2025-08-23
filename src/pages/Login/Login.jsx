@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 const Login = () => {
   // State to control whether the Login button is disabled
   const [disabled, setDisabled] = useState(true);
@@ -28,6 +29,23 @@ const Login = () => {
       .then(result => {
         const user = result.user;
         console.log(user)
+        Swal.fire({
+          title: "User Login Successful",
+          showClass: {
+            popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `
+          },
+          hideClass: {
+            popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `
+          }
+        });
       })
   }
 
@@ -45,7 +63,7 @@ const Login = () => {
 
   return (
     <>
-    <title>Bistro Boss | Login</title>
+      <title>Bistro Boss | Login</title>
       <div className="max-w-screen-xl mx-auto hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center md:w-1/2 lg:text-left">

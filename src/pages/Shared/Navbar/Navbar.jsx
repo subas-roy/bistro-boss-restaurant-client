@@ -22,7 +22,7 @@ const Navbar = () => {
       user ? <>
         <button onClick={handleLogout} className="btn btn-ghost">Logout</button>
       </> : <>
-        <Link to={'/login'}><button onClick={handleLogout} className="btn btn-ghost">Login</button></Link>
+        <Link to={'/login'} onClick={handleLogout} className="btn btn-ghost">Login</Link>
       </>
     }
   </>
@@ -44,7 +44,7 @@ const Navbar = () => {
             <a className="btn btn-ghost text-xl">Bistro Boss</a>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
+            <ul className="menu menu-horizontal px-1 flex justify-center items-center">
               {navOptions}
             </ul>
           </div>
