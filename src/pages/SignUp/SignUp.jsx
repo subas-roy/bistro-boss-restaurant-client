@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const {
@@ -62,7 +63,7 @@ const SignUp = () => {
                 {errors.password && <p className="text-red-600">{errors.password.message}</p>}
 
                 <input className="btn btn-neutral mt-4" type="submit" value="Sign In" />
-              </fieldset>
+              </fieldset><p className='text-center'><small>Already have an account? <Link to={"/login"}>Login</Link></small></p>
             </form>
           </div>
         </div>
