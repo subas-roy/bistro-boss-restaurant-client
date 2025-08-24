@@ -2,21 +2,39 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset // to reset the form after submission
   } = useForm();
 
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const onSubmit = (data) => {
+    console.log(data);
     createUser(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        // Update the user's profile with name and photo URL after account creation
+        updateUserProfile(data.name, data.photoUrl)
+          .then(() => {
+            console.log('user profile updated');
+            reset();
+
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "User created successfully!",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          })
+          .catch(error => console.log(error))
       })
   }
 
@@ -39,6 +57,10 @@ const SignUp = () => {
                 <label className="label">Name</label>
                 <input type="text" {...register("name", { required: true })} name="name" className="input" placeholder="Name" />
                 {errors.name && <span className="text-red-600">Name is required</span>}
+
+                <label className="label">Photo Url</label>
+                <input type="text" {...register("photoUrl", { required: true })} className="input" placeholder="Photo" />
+                {errors.photoUrl && <span className="text-red-600">Photo URL is required</span>}
 
                 <label className="label">Email</label>
                 <input type="email" {...register("email", { required: true })} name="email" className="input" placeholder="Email" />

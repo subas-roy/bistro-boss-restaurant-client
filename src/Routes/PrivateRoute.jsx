@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }) => {
 
   // Show a loading indicator while authentication status is being determined
   if (loading) {
-    return <progress className="progress w-56"></progress>;
+    return <div className="flex justify-center"><progress className="progress w-56"></progress></div>;
   }
 
   if (user) {
