@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
@@ -13,6 +13,7 @@ const SignUp = () => {
   } = useForm();
 
   const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -33,6 +34,7 @@ const SignUp = () => {
               showConfirmButton: false,
               timer: 1500
             });
+            navigate("/"); // Navigate to home page after successful sign up
           })
           .catch(error => console.log(error))
       })
