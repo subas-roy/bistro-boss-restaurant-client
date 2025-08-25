@@ -13,8 +13,8 @@ const Login = () => {
   // Hooks for navigation and getting the previous location
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-
+  const from = location.state?.from?.pathname || "/"; //
+  console.log('state in the location login page', location.state);
   // Load the captcha engine when the component mounts
   useEffect(() => {
     loadCaptchaEnginge(6)
@@ -86,7 +86,8 @@ const Login = () => {
                 <div><a className="link link-hover">Forgot password?</a></div>
                 < LoadCanvasTemplate />
                 <input type="text" onBlur={handleValidateCaptcha} className="input" placeholder="type the captcha above" />
-                <button disabled={disabled} className="btn btn-neutral mt-4">Login</button>
+                {/* TODO: apply disabled for re captcha */}
+                <button disabled={false} className="btn btn-neutral mt-4">Login</button>
               </fieldset>
               <p className='text-center'><small>New Here? <Link to={"/signup"}>Create an account</Link></small></p>
             </form>
